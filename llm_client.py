@@ -45,7 +45,7 @@ def chat(client, messages):
 
         message = completion.choices[0].message
 
-        # gpt-oss-120b is a reasoning model — it may include reasoning_content
+        
         reasoning = getattr(message, "reasoning_content", None)
         content = message.content or ""
 
