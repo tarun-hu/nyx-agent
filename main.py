@@ -10,6 +10,7 @@ Slash commands:
     /memory  — View stored memories
     /clear   — Clear conversation history
     /files   — List files in current directory
+    /btw     — Ask a quick side-question (doesn't affect main convo)
 """
 
 import os
@@ -68,6 +69,7 @@ def print_help():
   {GREEN}/forget{RESET}  — Clear all memories
   {GREEN}/clear{RESET}   — Clear conversation history (start fresh)
   {GREEN}/files{RESET}   — List files in current directory
+  {GREEN}/btw{RESET}     — Quick side-question (won't touch main convo)
 
 {YELLOW}{BOLD}What NyX can do:{RESET}
   - Chat about coding questions
@@ -111,6 +113,17 @@ def handle_slash_command(command, agent):
 
     elif cmd == "/files":
         print(f"\n{DIM}{list_directory('.')}{RESET}\n")
+        return True
+
+    elif cmd.startswith("/btw"):
+        # Side-conversation — doesn't pollute main chat history
+        question = command.strip()[4:].strip()
+        if not question:
+            print(f"{YELLOW}Usage: /btw <your question>{RESET}\n")
+            return True
+        print()  # Blank line for readability
+        response = agent.btw(question)
+        print(f"\n{MAGENTA}{BOLD}NyX (btw) ▸{RESET} {response}\n")
         return True
 
     return False

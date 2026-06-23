@@ -14,6 +14,7 @@ import re
 import config
 import llm_client
 import prompts
+from spinner import GenZSpinner
 from tools import execute_tool
 
 
@@ -55,8 +56,9 @@ class Agent:
             # Refresh system prompt to include latest memory (picks up changes dynamically)
             self._reset_system_prompt()
 
-            # Call the LLM
-            response = llm_client.chat(self.client, self.messages)
+            # Call the LLM (with Gen Z spinner ✨)
+            with GenZSpinner():
+                response = llm_client.chat(self.client, self.messages)
             content = response["content"]
 
             # Show reasoning if present (dimmed for readability)
@@ -183,3 +185,26 @@ class Agent:
         if len(self.messages) > max_messages:
             # Keep system prompt (index 0) and last N messages
             self.messages = [self.messages[0]] + self.messages[-(max_messages - 1):]
+
+    def btw(self, question):
+        """
+        Handle a /btw side-conversation.
+
+        Sends the question to the LLM with minimal context (just the system prompt)
+        and does NOT add the exchange to the main conversation history.
+
+        Args:
+            question: The user's side-question.
+
+        Returns:
+            The LLM's response to the side question.
+        """
+        side_messages = [
+            {"role": "system", "content": prompts.build_system_prompt()},
+            {"role": "user", "content": question},
+        ]
+
+        with GenZSpinner():
+            response = llm_client.chat(self.client, side_messages)
+
+        return response["content"]
