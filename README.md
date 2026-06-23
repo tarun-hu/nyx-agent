@@ -8,8 +8,10 @@ NyX is a beginner-friendly CLI coding agent. Think of it as a minimal, Claude CL
 - 📄 **Create files** — ask NyX to write a new script for you
 - ✏️ **Edit files** — NyX can modify existing code with find-and-replace
 - 📂 **Read files** — NyX reads your project files to understand context
-- 🖥️ **Run commands** — safely execute Python, pytest, pip, and other allowlisted commands
-- 🧠 **Remember context** — NyX stores useful facts between sessions in a local JSON file
+- 📁 **Create folders** — ask NyX to organize files or make project structures
+- 🖥️ **Run commands** — safely execute Python, pytest, pip, git, npm, npx, node, and other allowed commands
+- 🧠 **Remember context** — NyX stores useful facts (and searches for project roots) between sessions
+- 🛡️ **Interactive review** — NyX asks for confirmation before executing any modifying tool or command
 
 ## Quick Start
 
@@ -120,7 +122,7 @@ nyx-agent/
 ├── tools/
 │   ├── __init__.py      # Tool registry
 │   ├── file_tools.py    # Read, create, edit, append files
-│   ├── dir_tools.py     # List directory contents
+│   ├── dir_tools.py     # List directory contents & create directories
 │   └── shell_tools.py   # Safe shell command execution
 ├── requirements.txt
 ├── .env.example
@@ -143,8 +145,9 @@ The tool calling is done through a simple JSON schema — no complex frameworks 
 
 ## Safety Features
 
-- **Shell allowlist** — Only safe commands like `python`, `pytest`, `pip`, `ls`, `cat` can run
-- **Path sandboxing** — File operations are restricted to your working directory
+- **Shell allowlist** — Only allowed commands like `python`, `pytest`, `pip`, `ls`, `cat`, `git`, `npm`, `npx`, and `node` can run
+- **Interactive Review** — Modifying actions (creating/editing files, creating folders, running commands) require user review and approval (yes/no confirmation) before execution
+- **Path sandboxing** — File and directory operations are strictly restricted to your working directory
 - **Command timeout** — Shell commands timeout after 30 seconds
 - **Conversation trimming** — History is trimmed to keep context manageable
 
