@@ -72,7 +72,7 @@ class Agent:
                 tool_name = tool_call["tool"]
                 params = tool_call.get("params", {})
 
-                # Log the tool call
+                
                 print(f"\033[36m  >> Using tool: {tool_name}\033[0m")
                 if params:
                     # Show compact params (truncate long content)
