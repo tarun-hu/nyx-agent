@@ -4,7 +4,6 @@ Only allows commands from a small allowlist defined in config.py.
 """
 
 import subprocess
-import shlex
 import platform
 
 import config
