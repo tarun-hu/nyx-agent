@@ -15,7 +15,7 @@ NyX is a beginner-friendly CLI coding agent. Think of it as a minimal, Claude CL
 
 ### 1. Get an API Key
 
-Go to [NVIDIA Build](https://build.nvidia.com/openai/gpt-oss-120b) and get a free API key.
+Obtain an API key from your preferred AI platform/provider (such as OpenAI, Anthropic/Claude, NVIDIA Build, Google Gemini, etc.).
 
 ### 2. Setup
 
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 # Create your .env file
 cp .env.example .env
-# Then edit .env and paste your NVIDIA API key
+# Then edit .env and paste your API key
 ```
 
 ### 3. Run
@@ -113,7 +113,7 @@ NyX ▸ It ran successfully and printed "Hello, World!"
 nyx-agent/
 ├── main.py              # CLI entry point and interactive loop
 ├── agent.py             # The agent loop (think → tool → respond)
-├── llm_client.py        # NVIDIA API client (OpenAI-compatible)
+├── llm_client.py        # LLM API client wrapper (OpenAI-compatible)
 ├── memory.py            # JSON-based persistent memory
 ├── prompts.py           # System prompt and tool definitions
 ├── config.py            # Constants and settings
@@ -132,7 +132,7 @@ nyx-agent/
 NyX uses a simple **agent loop**:
 
 1. You type a message
-2. NyX sends it to the LLM (NVIDIA's gpt-oss-120b) along with tool descriptions
+2. NyX sends it to the LLM (by default, NVIDIA's gpt-oss-120b) along with tool descriptions
 3. The LLM either:
    - **Responds directly** → NyX shows you the response
    - **Calls a tool** (as a JSON object) → NyX executes it and feeds the result back
@@ -151,7 +151,7 @@ The tool calling is done through a simple JSON schema — no complex frameworks 
 ## Tech Stack
 
 - **Python 3.8+** — standard library for most things
-- **openai** — to talk to the NVIDIA API (OpenAI-compatible)
+- **openai** — to talk to the API (which is OpenAI-compatible)
 - **python-dotenv** — to load the API key from `.env`
 
 That's it. Two dependencies. No frameworks, no databases, no Docker.
