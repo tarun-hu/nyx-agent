@@ -132,7 +132,7 @@ nyx-agent/
 NyX uses a simple **agent loop**:
 
 1. You type a message
-2. NyX sends it to the LLM (by default, NVIDIA's gpt-oss-120b) along with tool descriptions
+2. NyX sends it to the LLM along with tool descriptions
 3. The LLM either:
    - **Responds directly** → NyX shows you the response
    - **Calls a tool** (as a JSON object) → NyX executes it and feeds the result back
