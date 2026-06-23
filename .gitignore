@@ -148,3 +148,5 @@ db.db
 
 # Nyx Agent files
 .nyx_memory.json
+
+.summary.md
