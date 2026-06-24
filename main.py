@@ -18,7 +18,7 @@ import sys
 
 # Fix Windows terminal encoding so special characters print correctly
 if sys.platform == "win32":
-    os.system("")  # Enable ANSI escape codes on Windows
+    os.system("")  
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
